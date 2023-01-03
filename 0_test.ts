@@ -18,8 +18,9 @@ const recoveryApi = new AxelarGMPRecoveryAPI({
     environment: Environment.TESTNET,
 });
 
-const mnemonic = "stick rhythm rabbit slot message spring school major benefit practice beyond pig";
-
+const mnemonic = "uncover play shiver victory embody seat engage mule public hip cruel mountain";
+const osmo_address = "osmo12vnlw82ynj6lhcnecfv939jzrxenk3h9y92jj3";
+const deposit_address = "0x6e775b04639fB207Cf36be052E79b53d8F2cf283";
 
 async function setupClient(mnemonic: string, rpc: string, gas: string | undefined): Promise<SigningCosmWasmClient> {
     if (gas === undefined) {
@@ -48,9 +49,12 @@ describe("Axelar-js tests", () => {
         console.log(wallet.mnemonic);
     });
 
-    xit("gets deposit address", async () => {
+    xit("get deposit address", async () => {
         let address = await getAddress(mnemonic);
-
+        console.log(address);
+        let res = await axelarAssetTransfer.getDepositAddress(
+            CHAINS.TESTNET.POLYGON, CHAINS.TESTNET.OSMOSIS, address, "uausdc");
+        console.log(res);
     });
 
 });
